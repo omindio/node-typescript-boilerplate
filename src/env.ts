@@ -20,6 +20,12 @@ export const env = {
     port: normalizePort(getEnv('APP_PORT'))
   },
   db: {
-    host: getEnvOptional('DB_HOST')
+    type: getEnv('DB_TYPE'),
+    url: getEnvOptional('DB_URL'),
+    host: getEnvOptional('DB_HOST'),
+    database: getEnv('DB_DATABASE'),
+    username: getEnvOptional('DB_USERNAME'),
+    password: getEnvOptional('DB_PASSWORD'),
+    port: parseInt(getEnvOptional('DB_PORT') as any, 10)
   }
 };

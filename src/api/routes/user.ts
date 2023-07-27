@@ -3,7 +3,7 @@ import { Router } from 'express';
 import UserController from '@controllers/user';
 
 class UserRoutes {
-  public routes: Router;
+  public readonly routes: Router;
   private controller: UserController;
   constructor() {
     this.routes = Router();

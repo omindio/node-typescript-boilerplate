@@ -33,7 +33,7 @@ class ErrorHandler {
         .json({ message: 'Internal server error' });
     }
 
-    console.log('Application encountered a critical error. Exiting!');
+    console.log(`Application encountered a critical error: ${error.message}`);
     process.exit(1);
   }
 }

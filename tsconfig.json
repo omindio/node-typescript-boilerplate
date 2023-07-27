@@ -14,6 +14,8 @@
     "strict": true,                                      /* Enable all strict type-checking options. */
     "noImplicitAny": true,                               /* Enable error reporting for expressions and declarations with an implied 'any' type. */                  /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true, 
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "baseUrl": "./",
     "paths": {
       "@controllers/*": ["src/api/controllers/*"],
@@ -21,9 +23,12 @@
       "@routes/*": ["src/api/routes/*"],
       "@models/*": ["src/api/models/*"],
       "@services/*": ["src/api/services/*"],
+      "@dto/*": ["src/api/dto/*"],
+      "@dal/*": ["src/api/dal/*"],
       "@lib/*": ["src/lib/*"],
       "@loaders/*": ["src/loaders/*"],
       "@tests": ["src/tests/*"],
+      "@validation" : ["src/api/validation"],
       "@/*": ["src/*"]
     }                              /* Skip type checking all .d.ts files. */
   },

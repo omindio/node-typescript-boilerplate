@@ -2,6 +2,9 @@
 /* eslint-disable no-shadow */
 export enum HttpCode {
   OK = 200,
+  OK_REMOVE = 204,
+  OK_UPDATE = 200,
+  OK_CREATE = 201,
   NO_CONTENT = 204,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,

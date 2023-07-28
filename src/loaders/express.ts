@@ -10,27 +10,27 @@ import { userRoutes } from '@routes/user';
 import { env } from '@/env';
 
 class Express {
-  public express: Application;
+  public app: Application;
   public server: http.Server;
 
   constructor() {
-    this.express = express();
-    this.server = http.createServer(this.express);
+    this.app = express();
+    this.server = http.createServer(this.app);
     this.loadRoutes();
     this.loadMiddlewares();
   }
 
   private loadMiddlewares(): void {
-    this.express.use(cors());
-    this.express.use(helmet());
+    this.app.use(cors());
+    this.app.use(helmet());
 
     // extended=false is a configuration option that tells the parser to use the classic encoding. When using it, values can be only strings or arrays.
-    this.express.use(bodyParser.urlencoded({ extended: false }));
-    this.express.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.json());
 
-    this.express.disable('x-powered-by');
+    this.app.disable('x-powered-by');
 
-    this.express.use(
+    this.app.use(
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         errorHandler.handleError(err, res);
       }
@@ -38,11 +38,11 @@ class Express {
   }
 
   private loadRoutes(): void {
-    this.express.get('/health', (req: Request, res: Response) => {
+    this.app.get('/health', (req: Request, res: Response) => {
       res.status(200).json('Application works!');
     });
 
-    this.express.use('/users', userRoutes.routes);
+    this.app.use('/users', userRoutes.routes);
   }
 
   public init(): any {

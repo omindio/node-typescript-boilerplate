@@ -1,3 +1,8 @@
+export const Roles = {
+  Admin: 'Admin',
+  User: 'User'
+};
+
 export type userType = {
   id?: string | number;
   firstName?: string;
@@ -6,6 +11,8 @@ export type userType = {
   password?: string;
   isActive?: boolean;
   isVerified?: boolean;
+  phone?: string;
+  role?: 'admin' | 'user' | undefined;
 };
 
 class UserDTO {
@@ -16,6 +23,8 @@ class UserDTO {
   public readonly password?: string;
   public readonly isActive?: boolean;
   public readonly isVerified?: boolean;
+  public readonly phone?: string;
+  public readonly role?: string;
 
   constructor(user: userType) {
     this.id = user.id;
@@ -25,6 +34,8 @@ class UserDTO {
     this.password = user.password;
     this.isActive = user.isActive;
     this.isVerified = user.isVerified;
+    this.phone = user.phone;
+    this.role = user.role;
   }
 }
 

@@ -11,7 +11,7 @@ class UserService {
   private validate: UserValidation;
 
   public findOneById = async (userDTOParam: UserDTO): Promise<UserDTO> => {
-    const { error } = await this.validate.find(userDTOParam);
+    const { error } = await this.validate.findOneById(userDTOParam);
     if (error) {
       throw new ValidationError(error);
     }

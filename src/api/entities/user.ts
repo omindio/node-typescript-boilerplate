@@ -22,4 +22,10 @@ export class User {
 
   @Column()
   isVerified: boolean;
+
+  @Column()
+  phone: string;
+
+  @Column()
+  role: string;
 }

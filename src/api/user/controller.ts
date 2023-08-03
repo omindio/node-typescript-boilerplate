@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
-import UserService from '@services/user';
-import { HttpCode } from '@lib/exceptions/AppError';
-import MissingParameterError from '@lib/exceptions/MissingParameterError';
-import UserDTO from '@dto/user';
+import { HttpCode } from '@/lib/exceptions/AppError';
+import MissingParameterError from '@/lib/exceptions/MissingParameterError';
+
+import UserService from './service';
+import UserDTO from './dto';
 
 class UserController {
   private service: UserService;

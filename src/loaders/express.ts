@@ -5,22 +5,20 @@ import cors from 'cors';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 
-import { errorHandler } from '@lib/exceptions/errorHandler';
-import { userRoutes } from '@routes/user';
+import { Loader } from '@/interfaces/loader';
+import { errorHandler } from '@/lib/exceptions/errorHandler';
 import { env } from '@/env';
 
-class Express {
+class Express implements Loader {
   public app: Application;
   public server: http.Server;
 
   constructor() {
     this.app = express();
     this.server = http.createServer(this.app);
-    this.loadRoutes();
-    this.loadMiddlewares();
   }
 
-  private loadMiddlewares(): void {
+  loadMiddlewares(): void {
     this.app.use(cors());
     this.app.use(helmet());
 
@@ -37,15 +35,13 @@ class Express {
     );
   }
 
-  private loadRoutes(): void {
+  loadRoutes(): void {
     this.app.get('/health', (req: Request, res: Response) => {
       res.status(200).json('Application works!');
     });
-
-    this.app.use('/users', userRoutes.routes);
   }
 
-  public init(): any {
+  init(): void {
     this.server.listen(env.app.port);
     console.log(`Application started on port ${env.app.port}!`);
   }

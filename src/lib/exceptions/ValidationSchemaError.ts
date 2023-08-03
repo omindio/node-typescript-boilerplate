@@ -19,6 +19,7 @@ export default class ValidationSchemaError extends AppError {
     }, {});
 
     super({
+      isOperational: true,
       description:
         JSON.stringify(errorsByKey) || 'Error validating properties.',
       httpCode: HttpCode.BAD_REQUEST

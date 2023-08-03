@@ -5,13 +5,15 @@ import { Application } from 'express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
-class Swagger {
+import { Loader } from '@/interfaces/loader';
+
+class Swagger implements Loader {
   private express: Application;
   constructor(express: Application) {
     this.express = express;
   }
 
-  public init(): void {
+  init(): void {
     const options = this.loadJSONDocs({
       failOnErrors: true,
       definition: {
@@ -43,9 +45,11 @@ class Swagger {
   }
 
   private loadJSONDocs(options: any) {
+    /*
     const jsonsInDir = fs
-      .readdirSync(path.join(process.cwd(), '/src/api/docs'))
+      .readdirSync(path.join(process.cwd(), '/src/api/**'))
       .filter((file) => path.extname(file) === '.json');
+
     jsonsInDir.forEach((file) => {
       const fileDataBuffer = fs.readFileSync(
         path.join(process.cwd(), `/src/api/docs/${file}`)
@@ -69,6 +73,7 @@ class Swagger {
         ...fileDataJSON.components.securitySchemes
       };
     });
+    */
     return options;
   }
 }

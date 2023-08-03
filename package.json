@@ -50,15 +50,6 @@
     "typeorm": "^0.3.17"
   },
   "_moduleAliases": {
-    "@": "./build",
-    "@loaders": "./build/loaders",
-    "@lib": "./build/lib",
-    "@routes": "./build/api/routes",
-    "@controllers": "./build/api/controllers",
-    "@services": "./build/api/services",
-    "@dto": "./build/api/dto",
-    "@dal": "./build/api/dal",
-    "@validation": "./build/api/validation",
-    "@docs": "./build/api/docs"
+    "@": "./build"
   }
 }

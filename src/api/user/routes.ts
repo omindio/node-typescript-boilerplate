@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import UserController from '@controllers/user';
+import UserController from './controller';
 
 class UserRoutes {
   public readonly routes: Router;

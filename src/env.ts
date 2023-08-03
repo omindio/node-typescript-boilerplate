@@ -2,7 +2,7 @@ import * as path from 'path';
 
 import * as dotenv from 'dotenv';
 
-import { getEnv, getEnvOptional, normalizePort } from '@lib/env';
+import { getEnv, getEnvOptional, normalizePort } from '@/lib/env';
 
 dotenv.config({
   path: path.join(

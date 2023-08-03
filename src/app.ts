@@ -1,6 +1,7 @@
-import Express from '@loaders/express';
-import TypeORM from '@loaders/typeorm';
-import Swagger from '@loaders/swagger';
+import Express from '@/loaders/express';
+import TypeORM from '@/loaders/typeorm';
+import Swagger from '@/loaders/swagger';
+import User from '@/api/user';
 
 class App {
   private express: Express;
@@ -14,14 +15,22 @@ class App {
   }
 
   private loaders(): void {
-    this.express.init();
     this.swagger.init();
+    this.express.loadRoutes();
+    this.express.loadMiddlewares();
+    this.express.init();
   }
 
-  public init(): any {
+  private async loadApis(): Promise<any> {
+    const user = new User(this.express.app);
+    await user.init();
+  }
+
+  public init(): void {
     this.orm
       .init()
       .then(() => {
+        this.loadApis();
         this.loaders();
       })
       .catch((error) => console.log(error));

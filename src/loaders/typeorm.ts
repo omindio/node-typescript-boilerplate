@@ -1,8 +1,9 @@
 import { DataSource } from 'typeorm';
 
 import { env } from '@/env';
+import { Loader } from '@/interfaces/loader';
 
-class TypeORM {
+class TypeORM implements Loader {
   private source: DataSource;
   constructor() {
     this.source = new DataSource({
@@ -21,7 +22,7 @@ class TypeORM {
     });
   }
 
-  public init(): Promise<DataSource> {
+  init(): Promise<DataSource> {
     return this.source.initialize();
   }
 }

@@ -1,5 +1,6 @@
-import UserDTO from '@dto/user';
-import MissingParameterError from '@lib/exceptions/MissingParameterError';
+import MissingParameterError from '@/lib/exceptions/MissingParameterError';
+
+import UserDTO from './dto';
 
 class UserDAL {
   public findOneById = async (userDTO: UserDTO): Promise<UserDTO> => {

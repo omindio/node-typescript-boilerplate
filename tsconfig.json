@@ -19,18 +19,6 @@
     "strictPropertyInitialization": false,
     "baseUrl": "./",
     "paths": {
-      "@controllers/*": ["src/api/controllers/*"],
-      "@middlewares": ["src/api/middlewares/*"],
-      "@routes/*": ["src/api/routes/*"],
-      "@models/*": ["src/api/models/*"],
-      "@services/*": ["src/api/services/*"],
-      "@dto/*": ["src/api/dto/*"],
-      "@docs/*": ["src/api/docs/*"],
-      "@dal/*": ["src/api/dal/*"],
-      "@lib/*": ["src/lib/*"],
-      "@loaders/*": ["src/loaders/*"],
-      "@tests": ["src/tests/*"],
-      "@validation" : ["src/api/validation"],
       "@/*": ["src/*"]
     }                              /* Skip type checking all .d.ts files. */
   },

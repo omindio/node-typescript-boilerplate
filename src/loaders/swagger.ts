@@ -9,6 +9,8 @@ import { Loader } from '@/interfaces/loader';
 
 class Swagger implements Loader {
   private express: Application;
+  private docFiles: string[] = [];
+
   constructor(express: Application) {
     this.express = express;
   }
@@ -44,36 +46,54 @@ class Swagger implements Loader {
     this.express.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
-  private loadJSONDocs(options: any) {
-    /*
-    const jsonsInDir = fs
-      .readdirSync(path.join(process.cwd(), '/src/api/**'))
-      .filter((file) => path.extname(file) === '.json');
+  private loadRecursiveFolder(dir: any) {
+    fs.readdirSync(dir).forEach((file: any) => {
+      const absolutePath = path.join(dir, file);
+      if (fs.statSync(absolutePath).isDirectory()) {
+        return this.loadRecursiveFolder(absolutePath);
+      } else {
+        if (path.extname(file) === '.json') {
+          return this.docFiles.push(absolutePath);
+        }
+      }
+    });
+  }
 
-    jsonsInDir.forEach((file) => {
-      const fileDataBuffer = fs.readFileSync(
-        path.join(process.cwd(), `/src/api/docs/${file}`)
-      );
+  private loadJSONDocs(options: any) {
+    this.loadRecursiveFolder(path.join(process.cwd(), '/src/api'));
+    this.docFiles.forEach((absolutePathFile) => {
+      const fileDataBuffer = fs.readFileSync(absolutePathFile);
       const fileDataJSON = JSON.parse(fileDataBuffer.toString());
 
       options.definition.paths = {
         ...options.definition.paths,
         ...fileDataJSON.paths
       };
-      options.definition.components.schemas = {
-        ...options.definition.components.schemas,
-        ...fileDataJSON.components.schemas
-      };
-      options.definition.components.requestBodies = {
-        ...options.definition.components.requestBodies,
-        ...fileDataJSON.components.requestBodies
-      };
-      options.definition.components.securitySchemes = {
-        ...options.definition.components.securitySchemes,
-        ...fileDataJSON.components.securitySchemes
-      };
+
+      if (fileDataJSON.components) {
+        if (fileDataJSON.components.schemas) {
+          options.definition.components.schemas = {
+            ...options.definition.components.schemas,
+            ...fileDataJSON.components.schemas
+          };
+        }
+
+        if (fileDataJSON.components.requestBodies) {
+          options.definition.components.requestBodies = {
+            ...options.definition.components.requestBodies,
+            ...fileDataJSON.components.requestBodies
+          };
+        }
+
+        if (fileDataJSON.components.securitySchemes) {
+          options.definition.components.securitySchemes = {
+            ...options.definition.components.securitySchemes,
+            ...fileDataJSON.components.securitySchemes
+          };
+        }
+      }
     });
-    */
+
     return options;
   }
 }

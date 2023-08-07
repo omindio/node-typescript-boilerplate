@@ -4,7 +4,7 @@ export const Roles = {
 };
 
 export type userType = {
-  id?: string | number;
+  id?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
@@ -15,8 +15,8 @@ export type userType = {
   role?: 'admin' | 'user' | undefined;
 };
 
-class UserDTO {
-  public readonly id?: string | number;
+export class UserDTO {
+  public readonly id?: string;
   public readonly firstName?: string;
   public readonly lastName?: string;
   public readonly email?: string;
@@ -38,5 +38,3 @@ class UserDTO {
     this.role = user.role;
   }
 }
-
-export default UserDTO;

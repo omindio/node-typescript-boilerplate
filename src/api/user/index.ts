@@ -1,6 +1,6 @@
 import { Application } from 'express';
 
-import { Api } from '@/interfaces/api';
+import { Api } from '@/core/interfaces/api';
 
 import { userRoutes } from './routes';
 

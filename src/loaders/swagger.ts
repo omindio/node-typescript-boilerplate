@@ -5,7 +5,7 @@ import { Application } from 'express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
-import { Loader } from '@/interfaces/loader';
+import { Loader } from '@/core/interfaces/loader';
 
 class Swagger implements Loader {
   private express: Application;
@@ -51,10 +51,8 @@ class Swagger implements Loader {
       const absolutePath = path.join(dir, file);
       if (fs.statSync(absolutePath).isDirectory()) {
         return this.loadRecursiveFolder(absolutePath);
-      } else {
-        if (path.extname(file) === '.json') {
-          return this.docFiles.push(absolutePath);
-        }
+      } else if (path.extname(file) === '.json') {
+        return this.docFiles.push(absolutePath);
       }
     });
   }

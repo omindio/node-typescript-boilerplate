@@ -4,9 +4,9 @@ import { HttpCode } from '@/lib/exceptions/AppError';
 import MissingParameterError from '@/lib/exceptions/MissingParameterError';
 
 import UserService from './service';
-import UserDTO from './dto';
+import { UserDTO } from './dto';
 
-class UserController {
+export class UserController {
   private service: UserService;
   public findOneById = async (
     req: Request,
@@ -18,7 +18,7 @@ class UserController {
     try {
       if (!idParameter) throw new MissingParameterError(['id']);
       const findUserDTO = new UserDTO({ id: idParameter });
-      const userDTO = await this.service.findOneById(findUserDTO);
+      const userDTO = await this.service.findById(findUserDTO);
       res.status(HttpCode.OK).json(userDTO);
     } catch (err) {
       next(err);
@@ -29,5 +29,3 @@ class UserController {
     this.service = new UserService();
   }
 }
-
-export default UserController;

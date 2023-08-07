@@ -21,7 +21,7 @@ class App {
     this.express.init();
   }
 
-  private async loadApis(): Promise<any> {
+  private async apis(): Promise<any> {
     const user = new User(this.express.app);
     await user.init();
   }
@@ -29,9 +29,9 @@ class App {
   public init(): void {
     this.orm
       .init()
-      .then(() => {
-        this.loadApis();
-        this.loaders();
+      .then(async () => {
+        await this.apis();
+        await this.loaders();
       })
       .catch((error) => console.log(error));
   }

@@ -1,8 +1,8 @@
 import Joi, { Schema, ValidationResult } from 'joi';
 
-import UserDTO, { Roles as Role } from './dto';
+import { UserDTO, Roles as Role } from './dto';
 
-class UserValidation {
+export class UserValidation {
   private id: Schema;
   private firstName: Schema;
   private lastName: Schema;
@@ -44,5 +44,3 @@ class UserValidation {
     this.role = Joi.string().valid(Role.User, Role.Admin).default(Role.User);
   }
 }
-
-export default UserValidation;

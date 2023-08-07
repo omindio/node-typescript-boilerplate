@@ -5,7 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 
-import { Loader } from '@/interfaces/loader';
+import { Loader } from '@/core/interfaces/loader';
 import { errorHandler } from '@/lib/exceptions/errorHandler';
 import { env } from '@/env';
 

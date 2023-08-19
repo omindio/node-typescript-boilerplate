@@ -15,7 +15,7 @@ class Swagger implements Loader {
     this.express = express;
   }
 
-  init(): void {
+  async init(): Promise<void> {
     const options = this.loadJSONDocs({
       failOnErrors: true,
       definition: {

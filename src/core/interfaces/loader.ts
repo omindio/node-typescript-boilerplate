@@ -1,3 +1,3 @@
 export interface Loader {
-  init(): any;
+  init(): Promise<any>;
 }

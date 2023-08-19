@@ -1,6 +1,7 @@
-export interface Repository<DTO> {
-  findById(id: string): Promise<DTO>;
-  exists(t: DTO): Promise<boolean>;
-  save(t: DTO): Promise<any>;
-  delete(t: DTO): Promise<any>;
+export interface Repository<T> {
+  findByUuid(uuid: string): Promise<T>;
+  exists(t: T): Promise<boolean>;
+  create(t: T): Promise<any>;
+  update(uuid: string, t: T): Promise<any>;
+  delete(t: T): Promise<any>;
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { UserController } from './controller';
+import { UserController } from './user.controller';
 
 class UserRoutes {
   public readonly routes: Router;
@@ -9,7 +9,9 @@ class UserRoutes {
     this.routes = Router();
     this.controller = new UserController();
 
-    this.routes.get('/:id', this.controller.findOneById);
+    this.routes.get('/:uuid', this.controller.findOneByUuid);
+    this.routes.post('/register-by-email', this.controller.registerByEmail);
+    this.routes.post('/register-by-phone', this.controller.registerByPhone);
   }
 }
 

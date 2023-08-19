@@ -1,17 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity('users')
 export class UserEntity {
-  @PrimaryColumn('uuid')
-  id: string;
+  @PrimaryColumn()
+  uuid: string;
 
-  @Column()
+  @Column({ nullable: true })
   firstName: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
-  @PrimaryColumn()
+  @Column({ nullable: true, unique: true })
   email: string;
 
   @Column()
@@ -24,6 +24,9 @@ export class UserEntity {
   isVerified: boolean;
 
   @Column()
+  twoFaEnabled: boolean;
+
+  @Column({ nullable: true, unique: true })
   phone: string;
 
   @Column()

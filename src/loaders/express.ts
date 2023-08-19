@@ -18,16 +18,18 @@ class Express implements Loader {
     this.server = http.createServer(this.app);
   }
 
-  loadMiddlewares(): void {
+  async loadMiddlewares(): Promise<void> {
     this.app.use(cors());
     this.app.use(helmet());
 
     // extended=false is a configuration option that tells the parser to use the classic encoding. When using it, values can be only strings or arrays.
-    this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
 
     this.app.disable('x-powered-by');
+  }
 
+  private loadErrorHandler(): void {
     this.app.use(
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         errorHandler.handleError(err, res);
@@ -35,13 +37,11 @@ class Express implements Loader {
     );
   }
 
-  loadRoutes(): void {
+  async init(): Promise<void> {
     this.app.get('/health', (req: Request, res: Response) => {
       res.status(200).json('Application works!');
     });
-  }
-
-  init(): void {
+    this.loadErrorHandler();
     this.server.listen(env.app.port);
     console.log(`Application started on port ${env.app.port}!`);
   }

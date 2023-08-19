@@ -2,7 +2,7 @@ import { Application } from 'express';
 
 import { Api } from '@/core/interfaces/api';
 
-import { userRoutes } from './routes';
+import { userRoutes } from './user.routes';
 
 export default class UserApi implements Api {
   private express: Application;

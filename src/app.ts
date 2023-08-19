@@ -1,3 +1,5 @@
+import { Container } from 'typedi';
+
 import Express from '@/loaders/express';
 import TypeORM from '@/loaders/typeorm';
 import Swagger from '@/loaders/swagger';
@@ -10,15 +12,8 @@ class App {
 
   constructor() {
     this.express = new Express();
-    this.orm = new TypeORM();
+    this.orm = Container.get(TypeORM);
     this.swagger = new Swagger(this.express.app);
-  }
-
-  private loaders(): void {
-    this.swagger.init();
-    this.express.loadRoutes();
-    this.express.loadMiddlewares();
-    this.express.init();
   }
 
   private async apis(): Promise<any> {
@@ -30,8 +25,10 @@ class App {
     this.orm
       .init()
       .then(async () => {
+        await this.express.loadMiddlewares();
         await this.apis();
-        await this.loaders();
+        await this.swagger.init();
+        await this.express.init();
       })
       .catch((error) => console.log(error));
   }

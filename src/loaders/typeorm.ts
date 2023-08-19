@@ -1,11 +1,22 @@
 import { DataSource } from 'typeorm';
+import { Service } from 'typedi';
 
 import { env } from '@/env';
 import { Loader } from '@/core/interfaces/loader';
-import { UserEntity } from '@/api/user/entity';
+import { UserEntity } from '@/api/user/user.entity';
 
+@Service()
 class TypeORM implements Loader {
   public source: DataSource;
+  init = async (): Promise<any> => {
+    return this.source
+      .initialize()
+      .then(() => {
+        console.log('Data Source has been initialized');
+      })
+      .catch((error) => console.log(error));
+  };
+
   constructor() {
     this.source = new DataSource({
       type: env.db.type as any,
@@ -21,10 +32,6 @@ class TypeORM implements Loader {
       subscribers: [],
       migrations: []
     });
-  }
-
-  init = async (): Promise<any> => {
-    return this.source.initialize().then(() => {console.log('Data Source has been initialized')}).catch((error) => console.log(error));
   }
 }
 

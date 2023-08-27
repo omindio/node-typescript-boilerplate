@@ -25,22 +25,7 @@ export class UserController {
     }
   };
 
-  registerByEmail = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
-    try {
-      const { email, password } = req.body;
-      const userDTO = new UserDTO({ email, password });
-      const user = await this.service.registerByEmail(userDTO);
-      res.status(HttpCode.OK).json(user);
-    } catch (err) {
-      next(err);
-    }
-  };
-
-  registerByPhone = async (
+  register = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -48,8 +33,20 @@ export class UserController {
     try {
       const { phone, password } = req.body;
       const userDTO = new UserDTO({ phone, password });
-      const user = await this.service.registerByPhone(userDTO);
+      const user = await this.service.register(userDTO);
       res.status(HttpCode.OK).json(user);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  login = async (
+    req: Request,
+    res: Response,
+    next:NextFunction
+  ): Promise<void> => {
+    try {
+
     } catch (err) {
       next(err);
     }

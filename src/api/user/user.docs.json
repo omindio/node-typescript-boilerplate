@@ -38,51 +38,7 @@
         }
       }
     },
-    "/users/register-by-email": {
-      "post": {
-        "tags": ["users"],
-        "summary": "Register user by email.",
-        "requestBody": {
-          "description": "Register new user in app",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "john@email.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "12345678"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid email or password supplied"
-          },
-          "404": {
-            "description": "Already exists (email, phone or id)"
-          }
-        }
-      }
-    },
-    "/users/register-by-phone": {
+    "/users/register": {
       "post": {
         "tags": ["users"],
         "summary": "Register user by phone.",

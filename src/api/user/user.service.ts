@@ -24,27 +24,11 @@ class UserService {
     });
   };
 
-  registerByEmail = async (userDTOParam: UserDTO): Promise<UserDTO> => {
-    const { error } = await this.validate.registerByEmail(userDTOParam);
-
-    if (error) throw new ValidationError(error);
-
-    const user = this.register(userDTOParam);
-
-    return user;
-  };
-
   registerByPhone = async (userDTOParam: UserDTO): Promise<UserDTO> => {
-    const { error } = await this.validate.registerByPhone(userDTOParam);
+    const { error } = await this.validate.register(userDTOParam);
 
     if (error) throw new ValidationError(error);
 
-    const user = this.register(userDTOParam);
-
-    return user;
-  };
-
-  private register = async (userDTOParam: UserDTO): Promise<UserDTO> => {
     const salt = await bcrypt.genSalt(this.passwordSalt);
     const hash = await bcrypt.hash(userDTOParam.password as string, salt);
 
@@ -66,6 +50,8 @@ class UserService {
       password: undefined
     });
   };
+
+  login = async () => {};
 
   constructor() {
     this.repository = new UserRepository();

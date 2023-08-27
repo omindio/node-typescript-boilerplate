@@ -10,8 +10,7 @@ class UserRoutes {
     this.controller = new UserController();
 
     this.routes.get('/:uuid', this.controller.findOneByUuid);
-    this.routes.post('/register-by-email', this.controller.registerByEmail);
-    this.routes.post('/register-by-phone', this.controller.registerByPhone);
+    this.routes.post('/register', this.controller.register);
   }
 }
 

@@ -32,25 +32,7 @@ export class UserValidation {
     return schema.validate(user);
   };
 
-  registerByEmail = async (user: UserDTO): Promise<ValidationResult> => {
-    const schema = Joi.object()
-      .keys({
-        uuid: this.uuid.optional(),
-        firstName: this.firstName.optional(),
-        lastName: this.lastName.optional(),
-        email: this.email.required(),
-        password: this.password.required(),
-        isActive: this.isActive.optional(),
-        isVerified: this.isVerified.optional(),
-        phone: this.phone.optional(),
-        role: this.role.optional(),
-        twoFaEnabled: this.twoFaEnabled.optional()
-      })
-      .options({ abortEarly: false });
-    return schema.validate(user);
-  };
-
-  registerByPhone = async (user: UserDTO): Promise<ValidationResult> => {
+  register = async (user: UserDTO): Promise<ValidationResult> => {
     const schema = Joi.object()
       .keys({
         uuid: this.uuid.optional(),

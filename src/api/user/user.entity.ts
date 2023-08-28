@@ -1,7 +1,8 @@
+import { BasePostgresEntity } from '@/core/base/postgresEntity';
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity('users')
-export class UserEntity {
+export class UserEntity extends BasePostgresEntity {
   @PrimaryColumn()
   uuid: string;
 
